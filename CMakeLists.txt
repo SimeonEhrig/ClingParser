@@ -21,12 +21,11 @@ message(INCLUDES: ${LLVM_INCLUDE_DIRS})
 llvm_map_components_to_libnames(llvm_libs bitreader option profiledata mc
                                 mcparser binaryformat support core)
 
-set(clang_libs clangAnalysis clangFrontend clangAST clangBasic clangDriver
-    clangEdit clangLex clangParse clangSema clangSerialization)
+set(clang_libs clangAST clangBasic clangFrontend clangTooling)
 
 include_directories(include/)
 
-add_executable(clingparser lib/main.cpp)
+add_executable(clingparser lib/main.cpp lib/MetaVisitor.cpp lib/MetaASTConsumer.cpp)
 target_link_libraries(clingparser ${llvm_libs} ${clang_libs})
 
 install(TARGETS clingparser RUNTIME DESTINATION bin)
